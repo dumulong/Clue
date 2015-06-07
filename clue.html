@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title> Clue Board </title>
+
+<meta name="Generator" content="EditPlus">
+<meta name="Author" content="">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+
+<link rel="apple-touch-icon" href="images/Clue.jpg" />
+
+<link rel="stylesheet" type="text/css" href="bootstrap-3.3.4-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="bootstrap-3.3.4-dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="styles/Clue.css">
+
+<script type="text/javascript" src="scripts/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="scripts/Clue.js"></script>
+<script type="text/javascript" src="bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="scripts/respond.min.js"></script>
+<script type="text/javascript" src="scripts/handlebars-v3.0.1.js"></script>
+
+
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a id="toggle-display" class="navbar-brand" href="#" onclick="toggle();">Hide</a>
+			<a class="navbar-brand" href="#" onclick="clearAction();">Clear</a>
+		</div>
+	</div>
+</div>
+
+<div id="content">
+	<div id="item-list"></div>
+</div>
+
+<script type="text/x-handlebars-template" id="item-template">
+
+	<table id="pad">
+
+		{{#each categoryLst}}
+
+			<tr id="{{category}}">
+				<th colspan="4">{{categoryLabel}}</th>
+			</tr>
+
+			{{#each items}}
+
+				<tr id="{{itemName}}">
+					<td class="value"><span></span></td>
+					<td class="item">{{itemLabel}}</td>
+					<td class="actionLst">&nbsp;</td>
+				</tr>
+
+			{{/each}}
+
+		{{/each}}
+
+	</table>
+
+</script>
+
+
+
+</body>
+
+</html>

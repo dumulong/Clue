@@ -1,0 +1,31 @@
+* { font-size: 1.0em; }
+body { background-color: #C0C0C0; }
+table { border-collapse:collapse; margin-top: 30px; background-color: white;}
+td, th { border: 1px solid gray; padding: 3px; }
+th { background-color: gray; color: white; text-align: center; }
+td { padding-left: 10px; }
+
+#suspect_mustard_image { background-color: yellow ; }
+#suspect_plum_image { background-color: purple ; }
+#suspect_green_image { background-color: green ; }
+#suspect_peacock_image { background-color: blue ; }
+#suspect_scarlet_image { background-color: red ; }
+#suspect_white_image { background-color: white ; }
+
+.actionLst img { padding-right: 8px; }
+.value img { padding-right: 8px; }
+.image { display: none; }
+.item { font-weight: bold; text-align: left; }
+img { width: 16px; height: 16px; }
+
+#btnHide { padding: 0 40px; }
+
+.glyphicon { padding-right: 12px; }
+
+.glyphicon-question-sign { color: blue; }
+.glyphicon-remove { color: red; }
+.glyphicon-ok { color: green; }
+
+#content { width: 100%; text-align: center; margin: 0 auto; padding-bottom: 50px; }
+#item-list { text-align: center; margin: 0 auto; padding-top: 60px; }
+#item-list table { text-align: center; margin: 0 auto; }
