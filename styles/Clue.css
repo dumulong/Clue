@@ -5,13 +5,6 @@ td, th { border: 1px solid gray; padding: 3px; }
 th { background-color: gray; color: white; text-align: center; }
 td { padding-left: 10px; }
 
-#suspect_mustard_image { background-color: yellow ; }
-#suspect_plum_image { background-color: purple ; }
-#suspect_green_image { background-color: green ; }
-#suspect_peacock_image { background-color: blue ; }
-#suspect_scarlet_image { background-color: red ; }
-#suspect_white_image { background-color: white ; }
-
 .actionLst img { padding-right: 8px; }
 .value img { padding-right: 8px; }
 .image { display: none; }
@@ -22,8 +15,8 @@ img { width: 16px; height: 16px; }
 
 .glyphicon { padding-right: 12px; }
 
-.glyphicon-question-sign { color: blue; }
-.glyphicon-remove { color: red; }
+.glyphicon-question-sign { color: #000066; }
+.glyphicon-remove { color: #990000; }
 .glyphicon-ok { color: green; }
 
 #content { width: 100%; text-align: center; margin: 0 auto; padding-bottom: 50px; }
