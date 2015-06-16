@@ -15,8 +15,8 @@ img { width: 16px; height: 16px; }
 
 .glyphicon { padding-right: 12px; }
 
-.glyphicon-question-sign { color: #000066; }
-.glyphicon-remove { color: #990000; }
+.glyphicon-question-sign { color: #0388ad; }
+.glyphicon-remove { color: #f14e32; }
 .glyphicon-ok { color: green; }
 
 #content { width: 100%; text-align: center; margin: 0 auto; padding-bottom: 50px; }

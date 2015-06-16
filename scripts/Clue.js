@@ -106,7 +106,7 @@ function addItemClick () {
 	$('.item').click(function() {
 		var myItem = $( this).parents ("tr").eq(0).attr('id');
 		var rgb = RGBToHex($( this ).css ( "color" )).toLowerCase();
-		var myColor = (rgb == '#cc0000' ? "black" : "#cc0000");
+		var myColor = (rgb == '#f14e32' ? "black" : "#f14e32");
 		$( this ).css ( "color", myColor );
 		setCookie ( myItem + "_color", myColor, 1000);
 		
