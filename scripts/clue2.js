@@ -52,9 +52,14 @@ String.prototype.supplant = function (o) {
     );
 };
 
-
+const componentTemplate = document.getElementById ("component-template").innerHTML;
 const categoryTemplate = document.getElementById ("category-template").innerHTML;
 const itemTemplate = document.getElementById ("item-template").innerHTML;
+
+function fillComponent (template) {
+    let component = componentTemplate.supplant(template);
+    return component;
+}
 
 function fillCategory (template) {
     let category = categoryTemplate.supplant(template);
@@ -67,13 +72,60 @@ function fillItem (template) {
 }
 
 function buildBoard () {
-    let html = "";
+    let content = "";
     categoryLst.forEach (category => {
-        html += fillCategory(category);
+        let html = fillCategory(category);
         category.items.forEach(item => {
             html += fillItem (item);
         })
+        content += fillComponent({component: html});
     })
     const board = document.getElementById ("board");
-    board.innerHTML = html;
+    board.innerHTML = content;
+}
+
+function clearAction() {
+	var ans = confirm("Are you sure you want to clear the board?");
+	if (ans == true) {
+		$( ".value span" ).each(function() {
+			$( this ).removeClass().addClass("glyphicon").addClass(actionLst["unknown"].actionIcon);
+			var myItem = $( this).parents ("tr").eq(0).attr('id');
+			setCookie ( myItem, "", 1000 );
+		});
+		$('.item').each(function() {
+			$( this ).css ( "color", "black" );
+			var myItem = $( this).parents ("tr").eq(0).attr('id');
+			setCookie ( myItem + "_color", "", 1000);
+		});
+
+	}
+}
+
+function setCookie(cname,cvalue,exdays) {
+	var d = new Date();
+	d.setTime(d.getTime()+(exdays*24*60*60*1000));
+	var expires = "expires="+d.toGMTString();
+	document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) {
+	  var c = ca[i].trim();
+	  if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+	}
+	return "";
+}
+
+function toggle () {
+    const content = document.getElementById("content");
+    const toggleDisplay = document.getElementById("toggle-display");
+	if (content.style.display == "none") {
+        content.style.display = "block";
+        toggleDisplay.innerText = "Hide";
+	} else {
+		content.style.display = "none";
+        toggleDisplay.innerText = "Show";
+	}
 }

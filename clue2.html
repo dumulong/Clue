@@ -19,35 +19,41 @@
 
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<a id="toggle-display" class="navbar-brand" href="#" onclick="toggle();">Hide</a>
-			</div>
-			<div class="col-md-6">
-				<a class="navbar-brand" href="#" style="float: right;" onclick="clearAction();">Clear</a>
-			</div>
-		</div>
+<div class="navbar">
+	<div>
+		<a id="toggle-display" href="#home" onclick="toggle();">Hide</a>
+	</div>
+	<div>
+		<a href="#news" onclick="clearAction();">Clear</a>
 	</div>
 </div>
 
+
 <div id="content">
-	<table id="board"></table>
+	<div id="board">
+	</div>
 </div>
 
+<script type="text/template" id="component-template">
+    <div class="component">{component}</div>
+</script>
+
 <script type="text/template" id="category-template">
-    <tr id="{category}">
-        <th colspan="4">{categoryLabel}</th>
-    </tr>
+    <div class="category">{categoryLabel}</div>
 </script>
 
 <script type="text/template" id="item-template">
-    <tr id="{itemName}">
-        <td class="value"><span></span></td>
-        <td class="item">{itemLabel}</td>
-        <td class="actionLst">&nbsp;</td>
-    </tr>
+	<div class="item">
+		<div class="item-value guess">&#9744;</div>
+		<div class="item">{itemLabel}</div>
+		<div class="item-guesses">
+			<div title="Unknown" class="guess guess-guess">&#9744;</div>
+			<div title="Not" class="guess guess-not">&#9746;</div>
+			<div title="Unsure" class="guess gunss-hint">&#x2754;</div>
+			<div title="Maybe" class="guess guess-maybe">&#x2755;</div>
+			<div title="Definitely" class="guess guess-certain">&#9745;</div>
+		</div>
+	</div>
 </script>
 
 <script type="text/javascript" src="scripts/clue2.js"></script>
