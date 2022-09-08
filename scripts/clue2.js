@@ -87,35 +87,29 @@ function buildBoard () {
 function clearAction() {
 	var ans = confirm("Are you sure you want to clear the board?");
 	if (ans == true) {
-		$( ".value span" ).each(function() {
-			$( this ).removeClass().addClass("glyphicon").addClass(actionLst["unknown"].actionIcon);
-			var myItem = $( this).parents ("tr").eq(0).attr('id');
-			setCookie ( myItem, "", 1000 );
-		});
-		$('.item').each(function() {
-			$( this ).css ( "color", "black" );
-			var myItem = $( this).parents ("tr").eq(0).attr('id');
-			setCookie ( myItem + "_color", "", 1000);
-		});
-
+        const unknown =  document.querySelector(`[data-guess="guess-unknown"]`);
+        const values = document.getElementsByClassName("item-value");
+        for (let i = 0; i < values.length; i++) {
+            values[i].innerHTML = unknown.innerHTML;
+            values[i].dataset.guess = "guess-unknown";
+            localStorage.setItem(values[i].dataset.item, "guess-unknown");
+        }
 	}
 }
 
-function setCookie(cname,cvalue,exdays) {
-	var d = new Date();
-	d.setTime(d.getTime()+(exdays*24*60*60*1000));
-	var expires = "expires="+d.toGMTString();
-	document.cookie = cname + "=" + cvalue + "; " + expires;
+function addGuessClick () {
+    const guesses = document.getElementsByClassName("guess");
+    for (let i = 0; i < guesses.length; i++) {
+        if (guesses[i].classList.contains("item-value")) { continue; }
+        guesses[i].addEventListener("click", pickGuess);
+    }
 }
 
-function getCookie(cname) {
-	var name = cname + "=";
-	var ca = document.cookie.split(';');
-	for(var i=0; i<ca.length; i++) {
-	  var c = ca[i].trim();
-	  if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-	}
-	return "";
+function pickGuess (e) {
+    const guessFor = e.target.dataset.guessFor
+    const item = document.querySelector(`[data-item="${guessFor}"]`);
+    item.innerHTML = e.target.innerHTML;
+    localStorage.setItem(item.dataset.item, e.target.dataset.guess);
 }
 
 function toggle () {

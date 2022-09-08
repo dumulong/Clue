@@ -44,14 +44,14 @@
 
 <script type="text/template" id="item-template">
 	<div class="item">
-		<div class="item-value guess">&#9744;</div>
+		<div class="item-value guess" data-item="{itemName}" data-guess="guess-unknown">&#9744;</div>
 		<div class="item">{itemLabel}</div>
 		<div class="item-guesses">
-			<div title="Unknown" class="guess guess-guess">&#9744;</div>
-			<div title="Not" class="guess guess-not">&#9746;</div>
-			<div title="Unsure" class="guess gunss-hint">&#x2754;</div>
-			<div title="Maybe" class="guess guess-maybe">&#x2755;</div>
-			<div title="Definitely" class="guess guess-certain">&#9745;</div>
+			<div data-guess-for="{itemName}" data-guess="guess-unknown" class="guess">&#9744;</div>
+			<div data-guess-for="{itemName}" data-guess="guess-not" class="guess">&#9746;</div>
+			<div data-guess-for="{itemName}" data-guess="guess-maybe" class="guess">&#x2754;</div>
+			<div data-guess-for="{itemName}" data-guess="guess-probably" class="guess">&#x2755;</div>
+			<div data-guess-for="{itemName}" data-guess="guess-certain" class="guess">&#9745;</div>
 		</div>
 	</div>
 </script>
@@ -60,6 +60,7 @@
 
 <script type="text/javascript">
 buildBoard ();
+addGuessClick();
 </script>
 
 </body>
