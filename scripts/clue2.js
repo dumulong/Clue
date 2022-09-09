@@ -56,7 +56,7 @@ String.prototype.supplant = function (o) {
     );
 };
 
-const message = document.querySelector ("#message");
+const messageDiv = document.querySelector ("#message");
 
 function fillTemplate (template, data) {
     return template.supplant(data);
@@ -154,8 +154,8 @@ function setMessage (item) {
     if (itemType === "suspect") {
         itemName = itemName[0].toUpperCase() + itemName.substring(1);
     }
-    message.innerHTML = `<span class="message-guess">${value}</span> : ${category[0].message} ${itemName}`;
+    messageDiv.innerHTML = `<span class="message-guess">${value}</span> : ${category[0].message} ${itemName}`;
     setTimeout(() => {
-        message.innerHTML ="";
+        messageDiv.innerHTML ="";
     }, 2000)
 }
