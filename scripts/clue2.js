@@ -81,6 +81,7 @@ function buildBoard () {
     const content = document.querySelector ("#content");
     content.innerHTML = board;
     addGuessClick();
+    applyLocalStorage();
 }
 
 function clearAction() {
@@ -89,12 +90,17 @@ function clearAction() {
         const unknown =  document.querySelector(`[data-guess="guess-unknown"]`);
         const values = document.querySelectorAll(".item-value");
         for (let i = 0; i < values.length; i++) {
-            values[i].innerHTML = unknown.innerHTML;
-            values[i].dataset.value = "guess-unknown";
-            values[i].classList.remove("guess-unknown", "guess-not", "guess-maybe", "guess-probably", "guess-certain");
+            setGuessValue(values[i], unknown);
             localStorage.setItem(values[i].dataset.item, "guess-unknown");
         }
 	}
+}
+
+function setGuessValue (item, guess) {
+    item.innerHTML = guess.innerHTML;
+    item.dataset.value = guess.dataset.guess;
+    item.classList.remove("guess-unknown", "guess-not", "guess-maybe", "guess-probably", "guess-certain");
+    item.classList.add (guess.dataset.guess);
 }
 
 function addGuessClick () {
@@ -109,12 +115,21 @@ function pickGuess (e) {
     const guess = e.target;
     const guessFor = guess.dataset.guessFor
     const item = document.querySelector(`[data-item="${guessFor}"]`);
-    item.innerHTML = guess.innerHTML;
-    item.dataset.value = guess.dataset.guess;
-    item.classList.remove("guess-unknown", "guess-not", "guess-maybe", "guess-probably", "guess-certain");
-    item.classList.add (guess.dataset.guess);
+    setGuessValue(item, guess);
     setMessage(item);
     localStorage.setItem(item.dataset.item, guess.dataset.guess);
+}
+
+function applyLocalStorage () {
+    const items = [...suspectList, ...weaponList, ...roomList];
+    items.forEach (item => {
+        const value = localStorage.getItem(item.itemName);
+        if (value) {
+            const elm = document.querySelector(`[data-item=${item.itemName}]`);
+            const guess = document.querySelector(`[data-guess=${value}]`);
+            setGuessValue(elm, guess);
+        }
+    })
 }
 
 function toggle () {
