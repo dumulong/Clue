@@ -37,9 +37,9 @@ const roomList = [
 // --------------------------------------
 
 const categoryLst = [
-    { category : "suspect", categoryLabel : "Suspects", items: suspectList },
-    { category : "room", categoryLabel : "Rooms", items: roomList },
-    { category : "weapon", categoryLabel : "Weapons", items: weaponList }
+    { category : "suspect", categoryLabel : "Suspects", message: "It was", items: suspectList },
+    { category : "weapon", categoryLabel : "Weapons", message: "With the", items: weaponList },
+    { category : "room", categoryLabel : "Rooms", message: "In the", items: roomList }
 ];
 
 // --------------------------------------
@@ -56,15 +56,17 @@ String.prototype.supplant = function (o) {
     );
 };
 
+const message = document.querySelector ("#message");
+
 function fillTemplate (template, data) {
     return template.supplant(data);
 }
 
 function buildBoard () {
 
-    const boardTemplate = document.getElementById ("board-template").innerHTML;
-    const componentTemplate = document.getElementById ("component-template").innerHTML;
-    const itemTemplate = document.getElementById ("item-template").innerHTML;
+    const boardTemplate = document.querySelector ("#board-template").innerHTML;
+    const componentTemplate = document.querySelector ("#component-template").innerHTML;
+    const itemTemplate = document.querySelector ("#item-template").innerHTML;
 
     let components = "";
     categoryLst.forEach (category => {
@@ -76,7 +78,7 @@ function buildBoard () {
         components += fillTemplate(componentTemplate, {categoryLabel, items});
     })
     const board = fillTemplate(boardTemplate,{components});
-    const content = document.getElementById ("content");
+    const content = document.querySelector ("#content");
     content.innerHTML = board;
 }
 
@@ -94,7 +96,7 @@ function clearAction() {
 }
 
 function addGuessClick () {
-    const guesses = document.getElementsByClassName("guess");
+    const guesses = document.querySelectorAll(".guess");
     for (let i = 0; i < guesses.length; i++) {
         if (guesses[i].classList.contains("item-value")) { continue; }
         guesses[i].addEventListener("click", pickGuess);
@@ -102,15 +104,18 @@ function addGuessClick () {
 }
 
 function pickGuess (e) {
-    const guessFor = e.target.dataset.guessFor
+    const guess = e.target;
+    const guessFor = guess.dataset.guessFor
     const item = document.querySelector(`[data-item="${guessFor}"]`);
-    item.innerHTML = e.target.innerHTML;
-    localStorage.setItem(item.dataset.item, e.target.dataset.guess);
+    item.innerHTML = guess.innerHTML;
+    item.dataset.value = guess.dataset.guess;
+    setMessage(item);
+    localStorage.setItem(item.dataset.item, guess.dataset.guess);
 }
 
 function toggle () {
-    const content = document.getElementById("content");
-    const toggleDisplay = document.getElementById("toggle-display");
+    const content = document.querySelector("#content");
+    const toggleDisplay = document.querySelector("#toggle-display");
 	if (content.style.display == "none") {
         content.style.display = "block";
         toggleDisplay.innerText = "Hide";
@@ -118,4 +123,21 @@ function toggle () {
 		content.style.display = "none";
         toggleDisplay.innerText = "Show";
 	}
+}
+
+function setMessage (item) {
+    console.log(item);
+    let itemName, itemType, itemValue
+    [itemType, itemName] = item.dataset.item.split("_");
+    [, itemValue] = item.dataset.value.split("-");
+    const value = itemValue[0].toUpperCase() + itemValue.substring(1);
+    const category = categoryLst.filter(x => x.category === itemType);
+    if (itemType === "suspect") {
+        itemName = itemName[0].toUpperCase() + itemName.substring(1);
+    }
+
+    message.innerHTML = `<span class="message-guess">${value}</span> : ${category[0].message} ${itemName}`;
+    setTimeout(() => {
+        message.innerHTML ="";
+    }, 2000)
 }
