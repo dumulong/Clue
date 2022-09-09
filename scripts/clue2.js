@@ -80,6 +80,7 @@ function buildBoard () {
     const board = fillTemplate(boardTemplate,{components});
     const content = document.querySelector ("#content");
     content.innerHTML = board;
+    addGuessClick();
 }
 
 function clearAction() {
@@ -90,6 +91,7 @@ function clearAction() {
         for (let i = 0; i < values.length; i++) {
             values[i].innerHTML = unknown.innerHTML;
             values[i].dataset.value = "guess-unknown";
+            values[i].classList.remove("guess-unknown", "guess-not", "guess-maybe", "guess-probably", "guess-certain");
             localStorage.setItem(values[i].dataset.item, "guess-unknown");
         }
 	}
@@ -109,6 +111,8 @@ function pickGuess (e) {
     const item = document.querySelector(`[data-item="${guessFor}"]`);
     item.innerHTML = guess.innerHTML;
     item.dataset.value = guess.dataset.guess;
+    item.classList.remove("guess-unknown", "guess-not", "guess-maybe", "guess-probably", "guess-certain");
+    item.classList.add (guess.dataset.guess);
     setMessage(item);
     localStorage.setItem(item.dataset.item, guess.dataset.guess);
 }
@@ -135,7 +139,6 @@ function setMessage (item) {
     if (itemType === "suspect") {
         itemName = itemName[0].toUpperCase() + itemName.substring(1);
     }
-
     message.innerHTML = `<span class="message-guess">${value}</span> : ${category[0].message} ${itemName}`;
     setTimeout(() => {
         message.innerHTML ="";

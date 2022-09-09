@@ -122,6 +122,7 @@ body {
 .item {
   display: flex;
   flex-flow: row;
+  font-size: 1.6rem;
 }
 
 .item-value {
@@ -130,7 +131,7 @@ body {
 }
 
 .item-label {
-  width: 10.5rem;
+  width: 12rem;
   border: 1px solid #e8e8e8;
   padding: 0.5rem;
   padding-left: .5rem;
@@ -146,4 +147,24 @@ body {
 .guess {
   width: 2.5rem;
   text-align: center;
+}
+
+.item-value.guess {
+  font-weight: 900;
+}
+
+.guess-maybe {
+  color: #FFA500;
+}
+
+.guess-probably {
+  color: #FFA500;
+}
+
+.guess-not {
+  color: red;
+}
+
+.guess-certain {
+  color: greenyellow;
 }
