@@ -9,68 +9,61 @@
 <meta name="Keywords" content="">
 <meta name="Description" content="">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-
-<link rel="apple-touch-icon" href="images/Clue.jpg" />
-
-<link rel="stylesheet" type="text/css" href="bootstrap-3.3.4-dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="bootstrap-3.3.4-dist/css/bootstrap-theme.min.css">
-<link rel="stylesheet" type="text/css" href="styles/Clue.css">
-
-<script type="text/javascript" src="scripts/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="scripts/Clue.js"></script>
-<script type="text/javascript" src="bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="scripts/respond.min.js"></script>
-<script type="text/javascript" src="scripts/handlebars-v3.0.1.js"></script>
-
+<link rel="apple-touch-icon" href="./clue.jpg" />
+<link rel="stylesheet" type="text/css" href="./clue.css">
 
 </head>
 
 <body>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<a id="toggle-display" class="navbar-brand" href="#" onclick="toggle();">Hide</a>
-			</div>
-			<div class="col-md-6">
-				<a class="navbar-brand" href="#" style="float: right;" onclick="clearAction();">Clear</a>
-			</div>
+<div class="navbar">
+	<div class="navbar-menu">
+		<div>
+			<button id="toggle-display" href="#home" onclick="toggle();">Hide</button>
+		</div>
+		<div id="message"></div>
+		<div>
+			<button href="#news" onclick="clearAction();">Clear</button>
 		</div>
 	</div>
+	<div class="separator"></div>
 </div>
 
-<div id="content">
-	<div id="item-list"></div>
-</div>
 
-<script type="text/x-handlebars-template" id="item-template">
+<div id="content"></div>
 
-	<table id="pad">
-
-		{{#each categoryLst}}
-
-			<tr id="{{category}}">
-				<th colspan="4">{{categoryLabel}}</th>
-			</tr>
-
-			{{#each items}}
-
-				<tr id="{{itemName}}">
-					<td class="value"><span></span></td>
-					<td class="item">{{itemLabel}}</td>
-					<td class="actionLst">&nbsp;</td>
-				</tr>
-
-			{{/each}}
-
-		{{/each}}
-
-	</table>
-
+<script type="text/template" id="board-template">
+    <div class="board">
+		{components}
+	</div>
 </script>
 
+<script type="text/template" id="component-template">
+	<div class="component">
+		<div class="category">{categoryLabel}</div>
+		<div class="items">{items}</div>
+	</div>
+</script>
 
+<script type="text/template" id="item-template">
+	<div class="item">
+		<div class="item-value guess" data-item="{itemName}" data-value="guess-unknown">&#9744;</div>
+		<div class="item-label">{itemLabel}</div>
+		<div class="item-guesses">
+			<div data-guess-for="{itemName}" data-guess="guess-unknown" class="guess">&#9744;</div>
+			<div data-guess-for="{itemName}" data-guess="guess-not" class="guess">&#9746;</div>
+			<div data-guess-for="{itemName}" data-guess="guess-maybe" class="guess">&#x2754;</div>
+			<div data-guess-for="{itemName}" data-guess="guess-probably" class="guess">&#x2755;</div>
+			<div data-guess-for="{itemName}" data-guess="guess-certain" class="guess">&#9745;</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/javascript" src="./clue.js"></script>
+
+<script type="text/javascript">
+buildBoard ();
+</script>
 
 </body>
 
