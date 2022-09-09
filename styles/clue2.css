@@ -3,7 +3,8 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
 html {
   box-sizing: border-box;
@@ -12,7 +13,7 @@ html {
 
 body {
   font-family: "Nunito", sans-serif;
-  color: #6D5D4B;
+  color: #6d5d4b;
   font-weight: 300;
   line-height: 1.6;
   font-size: 1.4rem;
@@ -44,21 +45,37 @@ body {
   margin-top: 4rem;
 }
 
+#board {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.component {
+  margin: 10px 3px;
+  padding: 3px;
+  border: 1px solid silver;
+}
+
 .category {
-    font-size: 1.6rem;
+  font-size: 1.6rem;
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
 }
 
 .item {
-    display: flex;
-    flex-flow: row;
-    width: 30rem;
+  display: flex;
+  flex-flow: row;
+  width: 260px;
 }
 
 .item-guesses {
-    display: flex;
-    flex-flow: row;
+  display: flex;
+  flex-flow: row;
 }
 
 .guess {
-    padding: 0 .5rem;
+  padding: 0 0.5rem;
 }
