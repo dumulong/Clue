@@ -35,12 +35,16 @@ const roomList = [
 // --------------------------------------
 // Create all the categories
 // --------------------------------------
+
 const categoryLst = [
     { category : "suspect", categoryLabel : "Suspects", items: suspectList },
-    { category : "weapon", categoryLabel : "Weapons", items: weaponList },
-    { category : "room", categoryLabel : "Rooms", items: roomList }
+    { category : "room", categoryLabel : "Rooms", items: roomList },
+    { category : "weapon", categoryLabel : "Weapons", items: weaponList }
 ];
 
+// --------------------------------------
+// The famous supplant!
+// --------------------------------------
 
 String.prototype.supplant = function (o) {
     return this.replace(
@@ -52,46 +56,38 @@ String.prototype.supplant = function (o) {
     );
 };
 
-const componentTemplate = document.getElementById ("component-template").innerHTML;
-const categoryTemplate = document.getElementById ("category-template").innerHTML;
-const itemTemplate = document.getElementById ("item-template").innerHTML;
-
-function fillComponent (template) {
-    let component = componentTemplate.supplant(template);
-    return component;
-}
-
-function fillCategory (template) {
-    let category = categoryTemplate.supplant(template);
-    return category;
-}
-
-function fillItem (template) {
-    let item = itemTemplate.supplant(template);
-    return item;
+function fillTemplate (template, data) {
+    return template.supplant(data);
 }
 
 function buildBoard () {
-    let content = "";
+
+    const boardTemplate = document.getElementById ("board-template").innerHTML;
+    const componentTemplate = document.getElementById ("component-template").innerHTML;
+    const itemTemplate = document.getElementById ("item-template").innerHTML;
+
+    let components = "";
     categoryLst.forEach (category => {
-        let html = fillCategory(category);
+        let items = "";
         category.items.forEach(item => {
-            html += fillItem (item);
+            items += fillTemplate (itemTemplate, item);
         })
-        content += fillComponent({component: html});
+        const categoryLabel = category.categoryLabel
+        components += fillTemplate(componentTemplate, {categoryLabel, items});
     })
-    const board = document.getElementById ("board");
-    board.innerHTML = content;
+    const board = fillTemplate(boardTemplate,{components});
+    const content = document.getElementById ("content");
+    content.innerHTML = board;
 }
 
 function clearAction() {
 	var ans = confirm("Are you sure you want to clear the board?");
 	if (ans == true) {
         const unknown =  document.querySelector(`[data-guess="guess-unknown"]`);
-        const values = document.getElementsByClassName("item-value");
+        const values = document.querySelectorAll(".item-value");
         for (let i = 0; i < values.length; i++) {
             values[i].innerHTML = unknown.innerHTML;
-            values[i].dataset.guess = "guess-unknown";
+            values[i].dataset.value = "guess-unknown";
             localStorage.setItem(values[i].dataset.item, "guess-unknown");
         }
 	}

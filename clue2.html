@@ -20,32 +20,38 @@
 <body>
 
 <div class="navbar">
-	<div>
-		<a id="toggle-display" href="#home" onclick="toggle();">Hide</a>
+	<div class="navbar-menu">
+		<div>
+			<a id="toggle-display" href="#home" onclick="toggle();">Hide</a>
+		</div>
+		<div>
+			<a href="#news" onclick="clearAction();">Clear</a>
+		</div>
 	</div>
-	<div>
-		<a href="#news" onclick="clearAction();">Clear</a>
-	</div>
+	<div class="message"></div>
+	<div class="separator"></div>
 </div>
 
 
-<div id="content">
-	<div id="board">
-	</div>
-</div>
+<div id="content"></div>
 
-<script type="text/template" id="component-template">
-    <div class="component">{component}</div>
+<script type="text/template" id="board-template">
+    <div class="board">
+		{components}
+	</div>
 </script>
 
-<script type="text/template" id="category-template">
-    <div class="category">{categoryLabel}</div>
+<script type="text/template" id="component-template">
+	<div class="component">
+		<div class="category">{categoryLabel}</div>
+		<div class="items">{items}</div>
+	</div>
 </script>
 
 <script type="text/template" id="item-template">
 	<div class="item">
-		<div class="item-value guess" data-item="{itemName}" data-guess="guess-unknown">&#9744;</div>
-		<div class="item">{itemLabel}</div>
+		<div class="item-value guess" data-item="{itemName}" data-value="guess-unknown">&#9744;</div>
+		<div class="item-label">{itemLabel}</div>
 		<div class="item-guesses">
 			<div data-guess-for="{itemName}" data-guess="guess-unknown" class="guess">&#9744;</div>
 			<div data-guess-for="{itemName}" data-guess="guess-not" class="guess">&#9746;</div>
