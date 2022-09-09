@@ -101,12 +101,22 @@ body {
   padding-bottom: 6px;
   background-color:#f2f2f2;
   color:#333;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 .items {
   display: flex;
   flex-direction: column;
   align-self: center;
+}
+
+.item:last-child .item-value {
+  border-bottom-left-radius: 1rem;
+}
+
+.item:last-child .item-guesses {
+  border-bottom-right-radius: 1rem;
 }
 
 .item {
